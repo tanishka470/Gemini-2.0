@@ -3,6 +3,16 @@ console.log('ContextProvider loaded');
 import runChat from "../config/Gemini";
 export const Context = createContext();
 const ContextProvider = (props)=>{
+    const [input, setInput] = useState("");
+    const[recentPrompts, setRecentPrompts] = useState("");
+    const [prevprompts, setPrevPrompts] = useState([]);
+    const [showResult,setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
+    Const[resultData,setResultData]=usestate("");
+
+
+  
+
      const onSent=async(prompt)=>{
          console.log('Calling runChat with prompt:', prompt);
          const response = await runChat(prompt);
@@ -14,9 +24,19 @@ const ContextProvider = (props)=>{
      }
      useEffect(() => {
          console.log('useEffect running in ContextProvider');
-         onSent("what is react js");
+         
      }, []);
     const contextValue = {
+        prevprompts,
+        setPrevPrompts,
+        onSent,
+        setRecentPrompts,
+        recentPrompts,
+        showResult,
+        loading,
+        resultData,
+        input,
+        setInput
 
     };
     return(
